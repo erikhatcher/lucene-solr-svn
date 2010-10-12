@@ -12,18 +12,23 @@
 
     <script>
     $(document).ready(function(){
-      $("\#q").autocomplete('#{url_for_solr}/terms', {  ## backslash escaped #q as that is a macro defined in VM_global_library.vm
-           extraParams:{
-             'terms.prefix': function() { return $("\#q").val();},
-             'terms.sort': 'count',
-             'terms.fl': 'name',
-             'wt': 'velocity',
-             'v.template': 'suggest'
-           }
-         }
-      );
-
-      // http://localhost:8983/solr/terms?terms.fl=name&terms.prefix=i&terms.sort=count
+      
+      $('\#q').keyup(function() {
+        $('#results').load('/solr/browse?v.layout=no_layout&v.template=results&q='+$('\#q').val());
+      });
+      
+    //   $("\#q").autocomplete('#{url_for_solr}/terms', {  ## backslash escaped #q as that is a macro defined in VM_global_library.vm
+    //        extraParams:{
+    //          'terms.prefix': function() { return $("\#q").val();},
+    //          'terms.sort': 'count',
+    //          'terms.fl': 'name',
+    //          'wt': 'velocity',
+    //          'v.template': 'suggest'
+    //        }
+    //      }
+    //   );
+    // 
+    //   // http://localhost:8983/solr/terms?terms.fl=name&terms.prefix=i&terms.sort=count
     });
     </script>
 

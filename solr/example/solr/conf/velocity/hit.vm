@@ -10,7 +10,7 @@
 <div class="result-document">
   <p><b>#field('name')</b> $!number.currency($doc.getFieldValue('price'))</p>
   
-  <p>#field('features')</p>
+  <p><b>#field('features')</b></p>
   
   #if($params.getBool("debugQuery",false))
     <a href="#" onclick='jQuery(this).siblings("pre").toggle(); return false;'>toggle explain</a>
