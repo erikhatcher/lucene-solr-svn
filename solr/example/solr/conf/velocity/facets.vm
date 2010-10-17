@@ -1,12 +1,16 @@
-  #if($response.facetFields)
-    <h2>Facets</h2>
-    #foreach($field in $response.facetFields)
-      <span class="facet-field">$field.name</span>
-      
-      <ul>
-        #foreach($facet in $field.values)
-            <li><a href="#url_for_facet_filter($field.name, $facet.name)">$facet.name</a> ($facet.count)</li>
+#if($response.facetFields)
+  <h2>Facets</h2>
+  #foreach($field in $response.facetFields)
+    <span class="facet-field">$field.name</span>
+
+    <ul>
+      #foreach($facet in $field.values)
+        #if ($facet.name)
+          <li><a href="#url_for_facet_filter($field.name, $facet.name)">$facet.name</a> ($facet.count)</li>
+        #elseif($facet.count != 0)
+          <li><a href="#url_for_home#lens&fq=$esc.url("-${field.name}:[* TO *]")"><em>&lt;no ${field.name}&gt;</em></a> ($facet.count)</li>
         #end
-      </ul>
-    #end
+      #end
+    </ul>
   #end
+#end
