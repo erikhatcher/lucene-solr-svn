@@ -41,8 +41,20 @@
 </div>
 
 <div class="results">
-  #foreach($doc in $response.results)
-    #parse("hit.vm")
+  #if($response.response.grouped)
+    #foreach($group_set in $response.response.grouped)
+      <div class="group">
+      <span>GROUP FIELD: $group_set.key ($group_set.value.matches)</span>
+      #foreach($group in $group_set.value.groups)
+        <div class="group_field">
+        <span>GROUP VALUE: $group.groupValue ($group.doclist.size() / $group.doclist.numFound)</span>
+        #render_doclist_hits($group.doclist)
+        </div>
+      #end
+      </div>
+    #end
+  #else
+    #render_doclist_hits($response.results)
   #end
 </div>
 

@@ -44,3 +44,11 @@
     #end
   #end
 #end
+
+#macro(render_doclist_hits $doclist)
+  <div class="results">
+    #foreach($doc in $doclist)
+      #parse("hit.vm")
+    #end
+  </div>
+#end
